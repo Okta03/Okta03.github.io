@@ -1,1 +1,587 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Request Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 100%; /* Lebar maksimal */
+            width: 90vw; /* 90% dari lebar layar */
+            margin: 0 auto; /* Agar tetap terpusat */
+        }
+        .form-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .form-label {
+            font-size: 12px;
+        }
+        .form-check-label {
+            font-size: 12px;
+        }
+        .form-control, .form-select {
+            font-size: 12px;
+        }
+        .vertical-hr {
+        width: 1px; /* Ketebalan garis */
+        height: 100%; /* Panjang garis */
+        background-color: #000; /* Warna garis */
+        margin: 0 15px; /* Jarak di kiri dan kanan */
+        display: inline-block;
+        }
+        .select2-selection__rendered {
+            font-size: 12px; /* Atur ukuran font sesuai kebutuhan */
+        }
+
+        .select2-container .select2-selection--single {
+            font-size: 12px; /* Menyesuaikan ukuran font pada tampilan dropdown */
+        }
+
+        .select2-container .select2-results__option {
+            font-size: 12px; /* Menyesuaikan ukuran font pada daftar dropdown */
+        }
+        .btn{
+            font-size: 12px;
+        }
+        input[name="confirmation_pd"], label[for="ng_repair"], label[for="mass_pro"], label[for="keep_ready"] {
+        font-size: 16px;
+        font-weight: bold; /* Menambahkan font tebal */
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container form-container">
+    <div class="row">
+        <div class="col-lg-8 col-md-6 col-sm-12" style="border-right: 1px solid #000;">
+            <div class="row" style="border-bottom: 1px solid #000;">
+                <!-- Kolom Kiri -->
+                <div class="col-lg-6 col-md-6 col-sm-12" style="border-right: 1px solid #000;">
+                    <!-- RRS No -->
+                    <div class="row mb-1">
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label for="rssNo" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">RRS No</label>
+                            <input type="text" class="form-control" id="rssNo" readonly disabled>
+                        </div>
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label for="status_rrs" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Status</label>
+                            <input type="text" class="form-control" id="status_rrs" readonly disabled>
+                        </div>
+                    </div>
+
+                    <!-- Status, Dies, Machine -->
+                    <div class="row mb-3">
+                    <div class="col-sm-6 d-flex align-items-center">
+                            <label for="dies" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Dies</label>
+                            <select id="dies"  class="form-select select2" >
+                                <option value="" disabled selected>Select Dies</option>
+                                <option value="1">Die-1</option>
+                                <option value="2">Die-2</option>
+                                <option value="3">Die-3</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label for="machine" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Machine</label>
+                            <select id="machine"  class="form-select select2" >
+                                <option value="" disabled selected>Select Machine</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="A3">A3</option>
+                                <option value="A4">A4</option>
+                                <option value="A5">A5</option>
+                                <option value="A6">A6</option>
+                                <option value="A7">A7</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B3">B3</option>
+                                <option value="B4">B4</option>
+                                <option value="B5">B5</option>
+                                <option value="B6">B6</option>
+                                <option value="B7">B7</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Request By, Category, Approved, Ack -->
+                    <div class="row mb-1">
+                        <div class="col-sm-4">
+                            <label for="requested_by" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Requested by</label>
+                            <input type="text" class="form-control" id="requested_by" readonly disabled>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="approved_by" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Approved by</label>
+                            <input type="text" class="form-control" id="approved_by">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="ack_by" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Acknowledged by</label>
+                            <input type="text" class="form-control" id="ack_by">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label for="dies_output" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Dies Output</label>
+                            <input type="text" class="form-control" id="dies_output">
+                        </div>
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label for="total_shot" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Total Shot</label>
+                            <input type="text" class="form-control" id="total_shot">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 d-flex align-items-center">
+                            <label for="dies_life" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Dies Life</label>
+                            <input type="text" class="form-control" id="dies_life" readonly disabled>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center">
+                            <label for="maintain_life" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Maintain Life</label>
+                            <input type="text" class="form-control" id="maintain_life" readonly disabled>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center">
+                            <label for="next_life" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Next Life</label>
+                            <input type="text" class="form-control" id="next_life" readonly disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <p><b>Request to Die Tooling</b></p>
+
+                    <div class="row mb-3 mx-0">
+                        <div class="col-sm-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="smallMaintenance">
+                            <label class="form-check-label" for="smallMaintenance">Small Maintenance/Cleaning</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="smallMaintenance">
+                            <label class="form-check-label" for="smallMaintenance">Small Repairing</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="smallMaintenance">
+                            <label class="form-check-label" for="smallMaintenance">Modification</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="smallMaintenance">
+                            <label class="form-check-label" for="smallMaintenance">Overhaul</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Kolom Tengah -->
+                <div class="col-lg-6 col-md-5 col-sm-12 mb-3">
+                    <p><b>Machine Condition</b></p>
+                    <div class="row mb-0">
+                        <div class="col-sm-4">
+                            <label for="dh" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">DH</label>
+                            <input type="text" class="form-control" id="dh">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="spm_ct" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">SPM/CT</label>
+                            <input type="text" class="form-control" id="spm_ct">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="release" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Release</label>
+                            <input type="text" class="form-control" id="release">
+                        </div>
+                    </div>
+                    <div class="row mb-0">
+                        <div class="col-sm-4">
+                            <label for="contact" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Contact</label>
+                            <input type="text" class="form-control" id="contact">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="pitch_cnt" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Pitch Cnt</label>
+                            <input type="text" class="form-control" id="pitch_cnt">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="pitch_material" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Pitch Material</label>
+                            <input type="text" class="form-control" id="pitch_material">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-0 mx-0">
+                        <div class="col-sm-2 form-check">
+                            <input type="checkbox" class="form-check-input" id="ips">
+                            <label class="form-check-label" for="ips">IPS</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="sensor_scrap">
+                            <label class="form-check-label" for="sensor_scrap">Sensor Scrap</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="sensor_contact">
+                            <label class="form-check-label" for="sensor_contact">Sensor Contact</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="sensor_misfeed">
+                            <label class="form-check-label" for="sensor_misfeed">Sensor Misfeed</label>
+                        </div>
+                    </div>
+                    <div class="row mb-0 mx-0">
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="feeder_contact">
+                            <label class="form-check-label" for="feeder_contact">Feeder Contact</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="fitting">
+                            <label class="form-check-label" for="fitting">Fitting</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input type="checkbox" class="form-check-input" id="tubing">
+                      <label class="form-check-label" for="tubing">Tubing</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mb-1 mt-0">
+                            <label for="dies" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Remark</label>
+                            <textarea type="text" class="form-control" id="dies" style="height: 90px;"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <p><b>Problem</b></p>
+                <div class="row mb-0">
+                    <div class="col-sm">
+                        <div class="row mb-1">
+                            <div class="col-sm-1">
+                                <label for="dh" class="form-label mb-0 me-2 text-center" style="white-space: nowrap; width: auto;"></label>
+                            </div>
+                            <div class="col-sm">
+                                <p class="mb-0 text-center" style="white-space: nowrap; width: auto; font-size: 1rem; line-height: 1.25;"><b>1</b></p>
+                            </div>
+                            <div class="col-sm">
+                                <p class="mb-0 text-center" style="white-space: nowrap; width: auto; font-size: 1rem; line-height: 1.25;"><b>2</b></p>
+                            </div>
+                            <div class="col-sm">
+                                <p class="mb-0 text-center" style="white-space: nowrap; width: auto; font-size: 1rem; line-height: 1.25;"><b>3</b></p>
+                            </div>
+                            <div class="col-sm">
+                                <p class="mb-0 text-center" style="white-space: nowrap; width: auto; font-size: 1rem; line-height: 1.25;"><b>4</b></p>
+                            </div>
+                            <div class="col-sm">
+                                <p class="mb-0 text-center" style="white-space: nowrap; width: auto; font-size: 1rem; line-height: 1.25;"><b>5</b></p>
+                            </div>
+
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-sm-1">
+                                <label for="dh" class="form-label mb-0 me-2" style="white-space: width: auto;">NG Item</label>
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="ng_1">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="ng_2">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="ng_3">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="ng_4">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="ng_5">
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-sm-1">
+                                <label for="dh" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Spec</label>
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="spec_1">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="spec_2">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="spec_3">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="spec_4">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="spec_5">
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-sm-1">
+                                <label for="dh" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Value</label>
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="value_1">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="value_2">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="value_3">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="value_4">
+                            </div>
+                            <div class="col mx-0">
+                                <input type="text" class="form-control" style="padding: 5px;" id="value_5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                    <div class="col-sm-12 mb-1 mt-0">
+                            <label for="dies" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Problem</label>
+                            <textarea type="text" class="form-control" id="dies" style="height: 100px;"></textarea>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Kolom Kanan -->
+        <div class="col-lg-4 col-md-5 col-sm-12">
+            <p><b>Upload Picture</b></p>
+            <!-- Upload Foto -->
+            <div class="row mb-4 mx-3">
+                <input type="file" class="form-control mb-3" id="photoUpload" accept="image/*" onchange="previewImage(event)">
+
+                <!-- Area Preview -->
+                <div id="photoPreview" style="
+                    border: 1px solid #ddd;
+                    width: 100%;
+                    height: 380px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    position: relative;
+                ">
+                <p class="text-muted" style="margin: 0;">Belum ada gambar</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+            <button class="btn btn-primary w-100">Save</button>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <p class="mt-2 mb-1"><b>Need Modification :</b></p>
+        <div class="col-lg-6 col-md-5 col-sm-12 mb-3 mt-0">
+            <div class="row mb-2">
+                <div class="col-sm d-flex align-items-center">
+                    <label for="dh" class="form-label mb-0 me-2" style="width: 80px;">Modification</label>
+                    <input type="text" class="form-control" id="dh">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm d-flex align-items-center">
+                    <label for="dh" class="form-label mb-0 me-2" style="width: 80px;">Part</label>
+                    <input type="text" class="form-control" id="dh">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-5 col-sm-12 mb-3 mt-0">
+            <div class="row mb-2">
+                <div class="col-sm d-flex align-items-center">
+                    <label for="dh" class="form-label mb-0 me-2" style="width: 80px;">From</label>
+                    <textarea type="text" class="form-control" id="dh"></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm d-flex align-items-center">
+                    <label for="dh" class="form-label mb-0 me-2" style="width: 80px;">To</label>
+                    <textarea type="text" class="form-control" id="dh"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row mb-1">
+                <p class="mb-1"><b>Receiving RRS</b></p>
+        </div>
+        <div class="col-sm-6" style="border-right: 1px solid #000;">
+            <div class="row mb-2">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <div class="col-sm-3 mx-3">
+                        <label for="start_rrs_date" class="form-label mb-0 me-2">Date (hh/bb/tttt)</label>
+                        <input type="date" class="form-control" id="start_rrs_date" disabled>
+                    </div>
+                    <div class="col-sm-3 mx-3">
+                        <label for="start_rrs_by" class="form-label mb-0 me-2">Start by</label>
+                        <input type="text" class="form-control" id="start_rrs_by" disabled>
+                    </div>
+                    <div class="col-sm mx-3">
+                        <button type="button" class="btn btn-primary w-100" id="start_rrs">Start</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <div class="col-sm-3 mx-3">
+                        <label for="take_over_rrs_date" class="form-label mb-0 me-2">Date (hh/bb/tttt)</label>
+                        <input type="date" class="form-control" id="take_over_rrs_date" disabled>
+                    </div>
+                    <div class="col-sm-3 mx-3">
+                        <label for="take_over_rrs_by" class="form-label mb-0 me-2">Take Over by</label>
+                        <input type="text" class="form-control" id="take_over_rrs_by" disabled>
+                    </div>
+                    <div class="col-sm mx-3">
+                        <button type="button" class="btn btn-success w-100" id="take_over_rrs">Take Over</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <div class="col-sm-3 mx-3">
+                        <label for="finish_rrs_date" class="form-label mb-0 me-2">Date (hh/bb/tttt)</label>
+                        <input type="date" class="form-control" id="finish_rrs_date" disabled>
+                    </div>
+                    <div class="col-sm-3 mx-3">
+                        <label for="finish_rrs_by" class="form-label mb-0 me-2">Finish by</label>
+                        <input type="text" class="form-control" id="finish_rrs_by" disabled>
+                    </div>
+                    <div class="col-sm mx-3">
+                        <button type="button" class="btn btn-warning w-100" id="finish_rrs">Finish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row mb-2">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <div class="col-sm-3 mx-2">
+                        <label for="approved_rrs_date" class="form-label mb-0 me-2">Date (hh/bb/tttt)</label>
+                        <input type="date" class="form-control" id="approved_rrs_date" disabled >
+                    </div>
+                    <div class="col-sm-3 mx-2">
+                        <label for="approved_rrs_by" class="form-label mb-0 me-2">Approved by</label>
+                        <input type="text" class="form-control" id="approved_rrs_by" disabled >
+                    </div>
+                    <div class="col-sm mx-2">
+                        <button type="button" class="btn btn-primary w-100" id="approved_rrs">Approved</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <div class="col-sm-3 mx-2">
+                        <label for="ack_rrs_date" class="form-label mb-0 me-2">Date (hh/bb/tttt)</label>
+                        <input type="date" class="form-control" id="ack_rrs_date" disabled >
+                    </div>
+                    <div class="col-sm-3 mx-2">
+                        <label for="ack_rrs_by" class="form-label mb-0 me-2">Acknowledged by</label>
+                        <input type="text" class="form-control" id="ack_rrs_by" disabled >
+                    </div>
+                    <div class="col-sm mx-2">
+                        <button type="button" class="btn btn-success w-100" id="ack_rrs">Acknowledge</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+    <p><b>Confirmation RRS After Repair</b></p>
+    <div class="row mb-3 mx-0">
+        <div class="col-sm-2 form-check">
+            <input type="radio" class="form-check-input" id="ng_repair" name="confirmation_pd" value="NG (NEED REPAIR)">
+            <label class="form-check-label" for="ng_repair">NG (NEED REPAIR)</label>
+        </div>
+        <div class="col-sm-2 form-check">
+            <input type="radio" class="form-check-input" id="mass_pro" name="confirmation_pd" value="MASS PRO">
+            <label class="form-check-label" for="mass_pro">MASS PRO</label>
+        </div>
+        <div class="col-sm-2 form-check">
+            <input type="radio" class="form-check-input" id="keep_ready" name="confirmation_pd" value="KEEP (READY)">
+            <label class="form-check-label" for="keep_ready">KEEP (READY)</label>
+        </div>
+        <div class="col-sm-3">
+            <label for="confirm_by" class="form-label mb-0 me-2" style="white-space: nowrap; width: auto;">Confirmation By</label>
+            <input type="text" class="form-control" id="confirm_by" readonly disabled>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-primary w-100">Confirmation</button>
+        </div>
+    </div>
+    <hr>
+</div>
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    
+    // Get the last generated RRS number from localStorage
+    let currentRSSNo = localStorage.getItem('currentRSSNo') || 1;
+        currentRSSNo = parseInt(currentRSSNo);
+
+        // Generate new RSS number
+        let rssNo = 'RRS-' + String(currentRSSNo).padStart(5, '0');
+        $('#rssNo').val(rssNo);
+
+        // Update the number for the next time
+        currentRSSNo++;
+        localStorage.setItem('currentRSSNo', currentRSSNo);
+    });
+</script>
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const previewContainer = document.getElementById("photoPreview");
+
+        // Hapus konten lama
+        previewContainer.innerHTML = "";
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.alt = "Preview Gambar";
+
+                // Atur gambar agar sesuai dengan kotak tanpa merusak proporsi
+                img.style.maxWidth = "100%";  // Membatasi lebar gambar hingga 100% dari container
+                img.style.maxHeight = "100%"; // Membatasi tinggi gambar hingga 100% dari container
+                img.style.objectFit = "contain"; // Pastikan gambar tidak terpotong dan tetap proporsional
+
+                previewContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            // Tampilkan pesan jika tidak ada gambar
+            previewContainer.innerHTML = '<p class="text-muted" style="margin: 0;">Belum ada gambar</p>';
+        }
+    }
+</script>
+</body>
+</html>
+
